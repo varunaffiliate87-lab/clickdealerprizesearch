@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spin the Wheel - Win a Gift Card</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+font-family: Arial, sans-serif;
+background:#f3f4f6;
+}
+
+#wheelCanvas{
+border-radius:50%;
+transition: transform 6s cubic-bezier(0.2,0.8,0.3,1);
+box-shadow:0 0 40px rgba(0,0,0,0.3);
+}
+
+#pointer{
+width:0;
+height:0;
+border-left:15px solid transparent;
+border-right:15px solid transparent;
+border-bottom:30px solid red;
+position:absolute;
+top:-15px;
+left:50%;
+transform:translateX(-50%);
+}
+
+.wheel-wrapper{
+position:relative;
+width:90vw;
+max-width:420px;
+aspect-ratio:1;
+}
+
+</style>
+
+</head>
+
+<body class="flex items-center justify-center min-h-screen">
+
+<div class="text-center">
+
+<h1 class="text-3xl font-bold text-red-600 mb-6">
+Spin the Wheel to Win a Gift Card!
+</h1>
+
+<div class="wheel-wrapper mx-auto">
+
+<div id="pointer"></div>
+
+<canvas id="wheelCanvas"></canvas>
+
+</div>
+
+<button id="spinButton"
+class="mt-6 bg-green-600 text-white font-bold px-8 py-3 rounded-full text-xl"
+onclick="spinWheel()">
+
+SPIN
+
+</button>
+
+<p id="statusMessage" class="mt-4 text-lg font-semibold"></p>
+
+<button id="claimButton"
+class="mt-6 bg-blue-600 text-white font-bold px-10 py-3 rounded-full text-xl hidden"
+onclick="redirectOffer()">
+
+CLAIM YOUR PRIZE
+
+</button>
+
+</div>
+
+<script>
+
+const CPA_LINK="https://tmstrack.com/?a=269565&o=159645&c=0&co=331052&mt=16";
+
+const segments=[
+"10% Discount",
+"Try Again",
+"$50 Cash",
+"Try Again",
+"Gift Card Winner",
+"Try Again",
+"Extra Spin",
+"Try Again"
+];
+
+const colors=[
+"#FFD700",
+"#FF6347",
+"#00CED1",
+"#FF6347",
+"#32CD32",
+"#FF6347",
+"#8A2BE2",
+"#FF6347"
+];
+
+const canvas=document.getElementById("wheelCanvas");
+const ctx=canvas.getContext("2d");
+
+let rotation=0;
+let spinning=false;
+
+function resizeCanvas(){
+
+let size=document.querySelector(".wheel-wrapper").clientWidth;
+
+canvas.width=size;
+canvas.height=size;
+
+drawWheel();
+
+}
+
+function drawWheel(){
+
+let center=canvas.width/2;
+let radius=center-5;
+
+let arc=2*Math.PI/segments.length;
+
+for(let i=0;i<segments.length;i++){
+
+ctx.beginPath();
+ctx.fillStyle=colors[i];
+
+ctx.moveTo(center,center);
+
+ctx.arc(center,center,radius,i*arc,(i+1)*arc);
+
+ctx.fill();
+
+ctx.save();
+
+ctx.translate(center,center);
+ctx.rotate(i*arc+arc/2);
+
+ctx.fillStyle="#fff";
+ctx.font="bold 16px Arial";
+ctx.textAlign="right";
+
+ctx.fillText(segments[i],radius-10,5);
+
+ctx.restore();
+
+}
+
+}
+
+function spinWheel(){
+
+if(spinning) return;
+
+spinning=true;
+
+document.getElementById("spinButton").disabled=true;
+
+document.getElementById("statusMessage").innerText="Spinning...";
+
+let winAngle=157.5;
+
+let spins=5*360;
+
+rotation+=spins+winAngle;
+
+canvas.style.transform="rotate("+rotation+"deg)";
+
+setTimeout(()=>{
+
+document.getElementById("statusMessage").innerText=
+"Congratulations! You Won a Gift Card 🎉";
+
+document.getElementById("claimButton").classList.remove("hidden");
+
+spinning=false;
+
+},6000);
+
+}
+
+function redirectOffer(){
+
+window.location.href=CPA_LINK;
+
+}
+
+window.addEventListener("load",resizeCanvas);
+
+window.addEventListener("resize",resizeCanvas);
+
+</script>
+
+</body>
+</html>
