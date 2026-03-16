@@ -2,259 +2,198 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17969829034"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17969829034');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17969829034"></script>
   <script>
-function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-17969829034/Aapka_Label_Yahan',
-      'event_callback': callback
-  });
-  return false;
-}
-</script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17969829034');
+  </script>
   <script>
-function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+        'send_to': 'AW-17969829034/XXXXXXXXX', // Is XXXXXXXXX ko apne label se badal dein
+        'event_callback': callback
+      });
+      return false;
     }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-17969829034/XXXXXXXXX', // Is XXXXXXXXX ko apne label se badal dein
-      'event_callback': callback
-  });
-  return false;
-}
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spin the Wheel - Win a Gift Card</title>
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spin the Wheel - Win a Gift Card</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-  <footer style="margin-top: 50px; padding: 20px; font-size: 12px; color: #666; text-align: center; border-top: 1px solid #eee; background: #f9f9f9;">
-    <p>
-        <a href="terms.html" style="color: #666; text-decoration: none; margin: 0 10px;">Terms & Conditions</a> | 
-        <a href="privacy.html" style="color: #666; text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
-        <a href="contact.html" style="color: #666; text-decoration: none; margin: 0 10px;">Contact Us</a>
-    </p>
-    <p style="margin-top: 10px;">
-        <strong>Disclaimer:</strong> This website is not affiliated with, endorsed by, or sponsored by Google, Facebook, or any of the brands mentioned. The $1000 prize is part of a promotional survey campaign. Participation is required.
-    </p>
-</footer>
-body{
-font-family: Arial, sans-serif;
-background:#f3f4f6;
-}
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+    }
 
-#wheelCanvas{
-border-radius:50%;
-transition: transform 6s cubic-bezier(0.2,0.8,0.3,1);
-box-shadow:0 0 40px rgba(0,0,0,0.3);
-}
+    #wheelCanvas {
+      border-radius: 50%;
+      transition: transform 6s cubic-bezier(0.2, 0.8, 0.3, 1);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    }
 
-#pointer{
-width:0;
-height:0;
-border-left:15px solid transparent;
-border-right:15px solid transparent;
-border-bottom:30px solid red;
-position:absolute;
-top:-15px;
-left:50%;
-transform:translateX(-50%);
-}
+    #pointer {
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 30px solid red;
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
 
-.wheel-wrapper{
-position:relative;
-width:90vw;
-max-width:420px;
-aspect-ratio:1;
-}
-
-</style>
-
+    .wheel-wrapper {
+      position: relative;
+      width: 90vw;
+      max-width: 420px;
+      aspect-ratio: 1;
+    }
+  </style>
 </head>
 
-<body class="flex items-center justify-center min-h-screen">
+<body class="flex flex-col items-center justify-between min-h-screen">
 
-<div class="text-center">
+  <div class="flex-grow flex items-center justify-center w-full px-4 py-10">
+    <div class="text-center w-full max-w-lg">
+      <h1 class="text-3xl font-bold text-red-600 mb-8">
+        Spin the Wheel to Win a Gift Card!
+      </h1>
 
-<h1 class="text-3xl font-bold text-red-600 mb-6">
-Spin the Wheel to Win a Gift Card!
-</h1>
+      <div class="wheel-wrapper mx-auto mb-8">
+        <div id="pointer"></div>
+        <canvas id="wheelCanvas"></canvas>
+      </div>
 
-<div class="wheel-wrapper mx-auto">
+      <!-- Main Spin Button -->
+      <button id="spinButton" onclick="spinWheel()" class="bg-black text-white font-bold px-8 py-3 rounded-md text-lg hover:bg-gray-800 transition-colors uppercase tracking-wider">
+        UNLOCK MY PLAY
+      </button>
 
-<div id="pointer"></div>
+      <p id="statusMessage" class="mt-4 text-lg font-semibold h-8"></p>
 
-<canvas id="wheelCanvas"></canvas>
+      <!-- Claim Button Hidden initially -->
+      <button id="claimButton" class="mt-4 bg-blue-600 text-white font-bold px-10 py-3 rounded-full text-xl hidden shadow-lg animate-bounce" onclick="return gtag_report_conversion('https://tmstrack.com/?a=269565&o=159645&c=0&co=331052&mt=16');">
+        CLAIM YOUR PRIZE
+      </button>
+    </div>
+  </div>
 
-</div>
-
-<button onclick="return gtag_report_conversion('https://tmstrack.com/?a=269565&o=159645&c=0&co=331052&mt=16');">
-    UNLOCK MY PLAY
-</button>
-
-<p id="statusMessage" class="mt-4 text-lg font-semibold"></p>
-
-<button id="claimButton"
-class="mt-6 bg-blue-600 text-white font-bold px-10 py-3 rounded-full text-xl hidden"
-onclick="redirectOffer()">
-
-CLAIM YOUR PRIZE
-
-</button>
-
-</div>
-
-<script>
-
-const CPA_LINK="https://tmstrack.com/?a=269565&o=159645&c=0&co=331052&mt=16";
-
-const segments=[
-"10% Discount",
-"Try Again",
-"$50 Cash",
-"Try Again",
-"Gift Card Winner",
-"Try Again",
-"Extra Spin",
-"Try Again"
-];
-
-const colors=[
-"#FFD700",
-"#FF6347",
-"#00CED1",
-"#FF6347",
-"#32CD32",
-"#FF6347",
-"#8A2BE2",
-"#FF6347"
-];
-
-const canvas=document.getElementById("wheelCanvas");
-const ctx=canvas.getContext("2d");
-
-let rotation=0;
-let spinning=false;
-
-function resizeCanvas(){
-
-let size=document.querySelector(".wheel-wrapper").clientWidth;
-
-canvas.width=size;
-canvas.height=size;
-
-drawWheel();
-
-}
-
-function drawWheel(){
-
-let center=canvas.width/2;
-let radius=center-5;
-
-let arc=2*Math.PI/segments.length;
-
-for(let i=0;i<segments.length;i++){
-
-ctx.beginPath();
-ctx.fillStyle=colors[i];
-
-ctx.moveTo(center,center);
-
-ctx.arc(center,center,radius,i*arc,(i+1)*arc);
-
-ctx.fill();
-
-ctx.save();
-
-ctx.translate(center,center);
-ctx.rotate(i*arc+arc/2);
-
-ctx.fillStyle="#fff";
-ctx.font="bold 16px Arial";
-ctx.textAlign="right";
-
-ctx.fillText(segments[i],radius-10,5);
-
-ctx.restore();
-
-}
-
-}
-
-function spinWheel(){
-
-if(spinning) return;
-
-spinning=true;
-
-document.getElementById("spinButton").disabled=true;
-
-document.getElementById("statusMessage").innerText="Spinning...";
-
-let winAngle=157.5;
-
-let spins=5*360;
-
-rotation+=spins+winAngle;
-
-canvas.style.transform="rotate("+rotation+"deg)";
-
-setTimeout(()=>{
-
-document.getElementById("statusMessage").innerText=
-"Congratulations! You Won a Gift Card 🎉";
-
-document.getElementById("claimButton").classList.remove("hidden");
-
-spinning=false;
-
-},6000);
-
-}
-
-function redirectOffer(){
-
-window.location.href=CPA_LINK;
-
-}
-
-window.addEventListener("load",resizeCanvas);
-
-window.addEventListener("resize",resizeCanvas);
-
-</script>
-<footer style="margin-top: 50px; padding: 30px; font-size: 13px; color: #666; text-align: center; border-top: 1px solid #ddd; background-color: #f9f9f9; font-family: Arial, sans-serif;">
+  <footer style="width: 100%; padding: 30px; font-size: 13px; color: #666; text-align: center; border-top: 1px solid #ddd; background-color: #f9f9f9; font-family: Arial, sans-serif;">
     <p>
-        <a href="terms.html" style="color: #444; text-decoration: none; font-weight: bold;">Terms & Conditions</a> | 
-        <a href="privacy.html" style="color: #444; text-decoration: none; font-weight: bold;">Privacy Policy</a> | 
-        <a href="contact.html" style="color: #444; text-decoration: none; font-weight: bold;">Contact Us</a>
+      <a href="terms.html" style="color: #444; text-decoration: none; font-weight: bold;">Terms & Conditions</a> |
+      <a href="privacy.html" style="color: #444; text-decoration: none; font-weight: bold;">Privacy Policy</a> |
+      <a href="contact.html" style="color: #444; text-decoration: none; font-weight: bold;">Contact Us</a>
     </p>
-    
+
     <p style="margin-top: 15px; line-height: 1.5; max-width: 800px; margin-left: auto; margin-right: auto;">
-        <strong>Disclaimer:</strong> This website is an independent promotional landing page and is not affiliated with, endorsed by, or sponsored by Google, Facebook, or any of the trademark owners of the prizes mentioned. The $1000 prize is part of a third-party sweepstakes survey. Participation in the survey is required to qualify.
+      <strong>Disclaimer:</strong> This website is an independent promotional landing page and is not affiliated with, endorsed by, or sponsored by Google, Facebook, or any of the trademark owners of the prizes mentioned. The $1000 prize is part of a third-party sweepstakes survey. Participation in the survey is required to qualify.
     </p>
-    
+
     <p style="margin-top: 10px; font-size: 11px;">
-        &copy; 2026 My Prize Search. All Rights Reserved.
+      &copy; 2026 My Prize Search. All Rights Reserved.
     </p>
-</footer>
+  </footer>
+
+  <script>
+    const CPA_LINK = "https://tmstrack.com/?a=269565&o=159645&c=0&co=331052&mt=16";
+
+    const segments = [
+      "10% Discount",
+      "Try Again",
+      "$50 Cash",
+      "Try Again",
+      "Gift Card Winner",
+      "Try Again",
+      "Extra Spin",
+      "Try Again"
+    ];
+
+    const colors = [
+      "#FFD700",
+      "#FF6347",
+      "#00CED1",
+      "#FF6347",
+      "#32CD32",
+      "#FF6347",
+      "#8A2BE2",
+      "#FF6347"
+    ];
+
+    const canvas = document.getElementById("wheelCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let rotation = 0;
+    let spinning = false;
+
+    function resizeCanvas() {
+      let size = document.querySelector(".wheel-wrapper").clientWidth;
+      canvas.width = size;
+      canvas.height = size;
+      drawWheel();
+    }
+
+    function drawWheel() {
+      let center = canvas.width / 2;
+      let radius = center - 5;
+      let arc = 2 * Math.PI / segments.length;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < segments.length; i++) {
+        ctx.beginPath();
+        ctx.fillStyle = colors[i];
+        ctx.moveTo(center, center);
+        ctx.arc(center, center, radius, i * arc, (i + 1) * arc);
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(center, center);
+        ctx.rotate(i * arc + arc / 2);
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 14px Arial";
+        ctx.textAlign = "right";
+        ctx.fillText(segments[i], radius - 10, 5);
+        ctx.restore();
+      }
+    }
+
+    function spinWheel() {
+      if (spinning) return;
+      spinning = true;
+
+      document.getElementById("spinButton").classList.add("opacity-50", "cursor-not-allowed");
+      document.getElementById("statusMessage").innerText = "Spinning...";
+
+      // Calculate winning angle for "Gift Card Winner" (Index 4)
+      // Base rotation + random extra spins + exact angle
+      let winAngle = 157.5; 
+      let spins = 5 * 360;
+      rotation += spins + (360 - (rotation % 360)) + winAngle;
+
+      canvas.style.transform = "rotate(" + rotation + "deg)";
+
+      setTimeout(() => {
+        document.getElementById("statusMessage").innerText = "Congratulations! You Won a Gift Card 🎉";
+        document.getElementById("claimButton").classList.remove("hidden");
+        document.getElementById("spinButton").classList.add("hidden");
+        spinning = false;
+      }, 6000);
+    }
+
+    window.addEventListener("load", resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
+  </script>
 </body>
 </html>
