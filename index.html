@@ -18,6 +18,20 @@ function gtag_report_conversion(url) {
     }
   };
   gtag('event', 'conversion', {
+      'send_to': 'AW-17969829034/Aapka_Label_Yahan',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
+  <script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
       'send_to': 'AW-17969829034/XXXXXXXXX', // Is XXXXXXXXX ko apne label se badal dein
       'event_callback': callback
   });
@@ -91,7 +105,7 @@ Spin the Wheel to Win a Gift Card!
 
 </div>
 
-<button onclick="return gtag_report_conversion('https://tmstrack.com/?a=269565&o=159645&c=0&co=331052&mt=16+');">
+<button onclick="return gtag_report_conversion('https://tmstrack.com/?a=269565&o=159645&c=0&co=331052&mt=16');">
     UNLOCK MY PLAY
 </button>
 
