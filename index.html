@@ -10,6 +10,20 @@
 
   gtag('config', 'AW-17969829034');
 </script>
+  <script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-17969829034/XXXXXXXXX', // Is XXXXXXXXX ko apne label se badal dein
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spin the Wheel - Win a Gift Card</title>
@@ -77,12 +91,8 @@ Spin the Wheel to Win a Gift Card!
 
 </div>
 
-<button id="spinButton"
-class="mt-6 bg-green-600 text-white font-bold px-8 py-3 rounded-full text-xl"
-onclick="spinWheel()">
-
-SPIN
-
+<button onclick="return gtag_report_conversion('https://tmstrack.com/?a=269565&o=159645&c=0&co=331052&mt=16+');">
+    UNLOCK MY PLAY
 </button>
 
 <p id="statusMessage" class="mt-4 text-lg font-semibold"></p>
@@ -217,6 +227,20 @@ window.addEventListener("load",resizeCanvas);
 window.addEventListener("resize",resizeCanvas);
 
 </script>
-
+<footer style="margin-top: 50px; padding: 30px; font-size: 13px; color: #666; text-align: center; border-top: 1px solid #ddd; background-color: #f9f9f9; font-family: Arial, sans-serif;">
+    <p>
+        <a href="terms.html" style="color: #444; text-decoration: none; font-weight: bold;">Terms & Conditions</a> | 
+        <a href="privacy.html" style="color: #444; text-decoration: none; font-weight: bold;">Privacy Policy</a> | 
+        <a href="contact.html" style="color: #444; text-decoration: none; font-weight: bold;">Contact Us</a>
+    </p>
+    
+    <p style="margin-top: 15px; line-height: 1.5; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <strong>Disclaimer:</strong> This website is an independent promotional landing page and is not affiliated with, endorsed by, or sponsored by Google, Facebook, or any of the trademark owners of the prizes mentioned. The $1000 prize is part of a third-party sweepstakes survey. Participation in the survey is required to qualify.
+    </p>
+    
+    <p style="margin-top: 10px; font-size: 11px;">
+        &copy; 2026 My Prize Search. All Rights Reserved.
+    </p>
+</footer>
 </body>
 </html>
